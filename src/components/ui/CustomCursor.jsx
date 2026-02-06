@@ -7,6 +7,9 @@ export default function CustomCursor() {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+        // Add class to hide default cursor safely
+        document.body.classList.add('custom-cursor-active');
+
         const mouseMove = (e) => {
             setMousePosition({
                 x: e.clientX,
@@ -28,6 +31,7 @@ export default function CustomCursor() {
         window.addEventListener('mouseenter', mouseEnter);
 
         return () => {
+            document.body.classList.remove('custom-cursor-active');
             window.removeEventListener('mousemove', mouseMove);
             window.removeEventListener('mouseleave', mouseLeave);
             window.removeEventListener('mouseenter', mouseEnter);
